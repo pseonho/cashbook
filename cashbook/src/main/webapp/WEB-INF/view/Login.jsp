@@ -12,14 +12,15 @@
 		<table border="1">
 			<tr>
 				<td>memberId</td>
-				<td><input type="text" name="memberId"></td>
+				<td><input type="text" name="memberId" placeholder="USER ID" value="guest"></td>
+				
 			</tr>
 			<tr>
 				<td>memberPw</td>
-				<td><input type="password" name="memberPw"></td>
+				<td><input type="password" name="memberPw" placeholder="USER PW" value="1234"></td>
 			</tr>
 		</table>
-		<button type="submit">로그인</button>
+		<button class="btn btn-outline-dark" type="submit">로그인</button>
 		<a class="btn btn-outline-dark" href="<%=request.getContextPath()%>/InsertMemberController">회원가입</a>
 	</form>
 </body>

@@ -41,11 +41,7 @@
 				<td>name</td>
 				<td><input type="text" name="name" class="form-control" value="<%=member.getName()%>"></td>
 			</tr>
-			<tr>
-				<td>gender</td>
-				<td><input type='radio' name='gender' value='남'>남
-				<input type='radio' name='gender' value='여'>여</td>
-			</tr>
+			
 			<tr>
 				<td>age</td>
 				<td>

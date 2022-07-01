@@ -33,6 +33,7 @@ public class MemberDao {
 			stmt = conn.prepareStatement(sql);
 			stmt.setString(1, member.getMemberId());
 			stmt.setString(2, member.getMemberPw());
+			System.out.println("selectMemberByIdPw"+member);
 			rs =stmt.executeQuery();
 			if(rs.next()) {
 				memberId=rs.getString("member_id");
@@ -106,6 +107,7 @@ public class MemberDao {
 			        stmt.setString(1, member.getMemberPw());
 			        stmt.setString(2, member.getName());
 			        stmt.setString(3,member.getMemberId());
+			        stmt.setInt(4, member.getAge());
 			        row = stmt.executeUpdate();
 			        if(row == 1) { // 디버깅
 						System.out.println("수정성공");
@@ -200,9 +202,47 @@ public class MemberDao {
 			     }
 				return row;
 			}
-			public Member selectMemberOne(String sessionMemberId) {
-				// TODO Auto-generated method stub
-				return null;
+			//member 상세보기
+			public Member selectMemberOne(String memberId) {
+				Member member = new Member();
+				Connection conn = null;
+				PreparedStatement stmt = null;
+				ResultSet rs = null;
+				//selectMemberOne 쿼리
+			    String sql ="SELECT member_id memberId, member_pw memberPw, name Name, age Age, create_date createDate FROM member WHERE member_id = ?";
+
+				try {
+					Class.forName("org.mariadb.jdbc.Driver");
+					conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
+					stmt = conn.prepareStatement(sql);
+					stmt.setString(1, memberId);
+					System.out.println(memberId);
+					rs = stmt.executeQuery();
+					System.out.println("executeQuery " + rs);			
+				
+					if(rs.next()) {
+						member = new Member();
+						member.setMemberId(rs.getString("memberId"));
+						member.setName(rs.getString("Name"));
+						member.setAge(rs.getInt("Age"));
+						member.setCreateDate(rs.getString("createDate"));
+						System.out.println("selectMemberOne---->" + member);
+					}
+						
+				} catch (Exception e) {
+					e.printStackTrace();
+			
+					} finally {
+					try {
+						//DB자원 반납
+						
+						stmt.close();
+						conn.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				return member;
 			}
 }
 

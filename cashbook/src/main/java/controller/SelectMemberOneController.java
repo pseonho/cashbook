@@ -10,7 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import dao.MemberDao;
-import vo.Member;
+import vo.*;
+
 
 @WebServlet("/SelectMemberOneController")
 public class SelectMemberOneController extends HttpServlet {
@@ -27,10 +28,10 @@ public class SelectMemberOneController extends HttpServlet {
 		}
 		
 			MemberDao memberDao = new MemberDao(); // 메서드 사용을 위한 객체 생성
-			Member member = memberDao.selectMemberOne(sessionMemberId);
+			Member member = new Member();
+			member = memberDao.selectMemberOne(sessionMemberId);
 			
 			request.setAttribute("member", member);
-			
 			request.getRequestDispatcher("/WEB-INF/view/SelectMemberOne.jsp").forward(request, response);
 			
 		}
