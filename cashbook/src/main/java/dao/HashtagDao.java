@@ -25,7 +25,7 @@ public class HashtagDao {
 	            GROUP BY tag) t
 	          */
 	         Class.forName("org.mariadb.jdbc.Driver");
-	         conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","java1234");
+	         conn = DriverManager.getConnection("jdbc:mariadb://localhost:3306/cashbook","root","mariadb1234");
 	         String sql = "SELECT t.tag, t.cnt, RANK() over(ORDER BY t.cnt DESC) rank"
 	               + "            FROM"
 	               + "            (SELECT tag, COUNT(*) cnt"
